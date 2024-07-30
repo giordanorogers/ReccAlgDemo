@@ -1,5 +1,5 @@
 import sqlite3
-import json
+import ast
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 
@@ -13,9 +13,9 @@ def get_similarity_matrix():
     cursor.execute('SELECT EmpID, Spaces FROM Employees')
     employees = cursor.fetchall()
 
-    # Convert JSON strings to lists
+    # Convert space strings to lists
     employee_spaces = {
-        emp_id: json.loads(spaces) for emp_id, spaces in employees if spaces
+        emp_id: ast.literal_eval(spaces) for emp_id, spaces in employees if spaces
     }
     if not employee_spaces:
         raise ValueError("No employee data found")

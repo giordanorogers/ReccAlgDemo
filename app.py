@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import threading
 from similarity import get_similarity_matrix, recommend_spaces
-import os
 
 app = Flask(__name__)
 CORS(app)
