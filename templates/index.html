@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Space Recommendations</title>
+    <script>
+        async function getRecommendations() {
+            const empId = document.getElementById('empId').value;
+            const response = await fetch(`http://127.0.0.1:5002/recommendations/${empId}`);
+            const recommendations = await response.json();
+            const recommendationsList = document.getElementById('recommendations');
+            recommendationsList.innerHTML = '';
+            recommendations.forEach(space => {
+                const li = document.createElement('li');
+                li.textContent = `Space ID: ${space}`;
+                recommendationsList.appendChild(li);
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Employee Space Recommendations</h1>
+    <label for="empId">Enter Employee ID:</label>
+    <input type="number" id="empId" value="101">
+    <button onclick="getRecommendations()">Get Recommendations</button>
+    <h2>Recommended Spaces:</h2>
+    <ul id="recommendations"></ul>
+</body>
+</html>
