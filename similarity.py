@@ -17,7 +17,6 @@ def get_similarity_matrix():
     employee_spaces = {
         emp_id: json.loads(spaces) for emp_id, spaces in employees if spaces
     }
-    print(f"Employee spaces:\n{employee_spaces}")
     if not employee_spaces:
         raise ValueError("No employee data found")
 
@@ -25,13 +24,11 @@ def get_similarity_matrix():
     all_spaces = set(
         space for spaces in employee_spaces.values() for space in spaces
     )
-    print(f"All spaces:\n{all_spaces}")
     if not all_spaces:
         raise ValueError("No spaces data found")
 
     # Create binary membership matrix
     emp_ids = list(employee_spaces.keys())
-    print(f"Employee ids:\n{emp_ids}")
     space_indices = {space: idx for idx, space in enumerate(all_spaces)}
 
     membership_matrix = np.zeros((len(emp_ids), len(all_spaces)))
